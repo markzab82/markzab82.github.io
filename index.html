@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Product Marketing Lab — Fractional PMM Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2540;
+    --navy-light: #243052;
+    --teal: #008b9a;
+    --teal-light: #00a8b8;
+    --amber: #e8a030;
+    --white: #ffffff;
+    --off-white: #f5f7fa;
+    --text: #1a2540;
+    --muted: #5a6278;
+    --border: #dde2ed;
+    --card-bg: #ffffff;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--text);
+    line-height: 1.6;
+    font-size: 15px;
+  }
+
+  /* ── HEADER ─────────────────────────────────── */
+  header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 48px 60px 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 320px; height: 320px;
+    border-radius: 50%;
+    background: rgba(0,139,154,0.15);
+    pointer-events: none;
+  }
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: -40px; left: 40%;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(232,160,48,0.08);
+    pointer-events: none;
+  }
+
+  .header-grid {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 40px;
+    align-items: start;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .header-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 4vw, 3.4rem);
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .header-left .title {
+    color: var(--amber);
+    font-weight: 600;
+    font-size: 1.1rem;
+    letter-spacing: 0.3px;
+    margin-bottom: 14px;
+  }
+  .header-left .principal-line {
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .header-left .principal-line a { color: rgba(255,255,255,0.75); text-decoration: none; }
+  .header-left .principal-line a:hover { color: var(--amber); }
+  .principal-label {
+    background: var(--teal);
+    color: var(--white);
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .principal-name {
+    font-weight: 600;
+    color: var(--white);
+  }
+  .principal-sep { color: rgba(255,255,255,0.3); }
+  .header-left .tagline {
+    font-style: italic;
+    font-size: 0.88rem;
+    color: rgba(255,255,255,0.55);
+    margin-top: 4px;
+  }
+
+  .clients-block { text-align: right; }
+  .clients-block .label {
+    font-size: 0.7rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--teal-light);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .clients-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+  .client-pill {
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 4px;
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-align: center;
+    white-space: nowrap;
+    color: var(--white);
+    transition: background 0.2s;
+  }
+  .client-pill:hover { background: rgba(0,139,154,0.3); }
+
+  /* ── TEAL ACCENT BAR ─────────────────────────── */
+  .accent-bar {
+    height: 4px;
+    background: linear-gradient(90deg, var(--teal), var(--amber));
+  }
+
+  /* ── MAIN CONTENT ────────────────────────────── */
+  main {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 60px 60px;
+    display: grid;
+    grid-template-columns: 1fr 1.2fr 1fr;
+    gap: 36px;
+  }
+
+  /* ── SECTIONS ────────────────────────────────── */
+  .section-label {
+    font-size: 0.68rem;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 700;
+    margin-bottom: 14px;
+    padding-left: 10px;
+    border-left: 3px solid var(--teal);
+  }
+
+  /* About */
+  .about p {
+    font-size: 0.92rem;
+    color: var(--muted);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  /* What I Offer */
+  .offer-list { list-style: none; margin-bottom: 24px; }
+  .offer-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 0.88rem;
+    color: var(--muted);
+  }
+  .offer-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--teal);
+    margin-top: 6px;
+  }
+  .offer-list li strong { color: var(--text); }
+
+  /* Expertise tags */
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 12px;
+  }
+  .tag {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 0.75rem;
+    font-weight: 500;
+    padding: 5px 11px;
+    border-radius: 3px;
+    letter-spacing: 0.2px;
+  }
+
+  /* Engagement timeline */
+  .timeline { display: flex; flex-direction: column; gap: 10px; margin-bottom: 28px; }
+  .phase {
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  .phase-header {
+    background: var(--navy);
+    color: var(--white);
+    padding: 9px 14px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+  .phase-header .weeks {
+    color: var(--teal-light);
+    margin-right: 8px;
+  }
+  .phase-body {
+    background: var(--card-bg);
+    padding: 11px 14px;
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  /* Engagement model */
+  .model-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+  .model-table tr { border-bottom: 1px solid var(--border); }
+  .model-table tr:last-child { border-bottom: none; }
+  .model-table td { padding: 8px 4px; }
+  .model-table td:first-child { font-weight: 600; color: var(--text); width: 110px; }
+  .model-table td:last-child { color: var(--muted); }
+
+  /* Value cards */
+  .value-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+  .value-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--amber);
+    border-radius: 0 6px 6px 0;
+    padding: 12px 14px;
+  }
+  .value-card h4 {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .value-card p {
+    font-size: 0.8rem;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  /* Why Mark */
+  .why-list { list-style: none; }
+  .why-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+  .why-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--navy);
+    margin-top: 5px;
+  }
+
+  /* ── FOOTER ────────────────────────────────── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.6);
+    text-align: center;
+    padding: 18px 40px;
+    font-size: 0.82rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  footer a {
+    color: var(--amber);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  footer a:hover { text-decoration: underline; }
+
+  /* ── CTA BUTTON ─────────────────────────────── */
+  .cta-section {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 16px 0 0;
+  }
+  .cta-btn {
+    display: inline-block;
+    background: var(--teal);
+    color: var(--white);
+    padding: 14px 36px;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .cta-btn:hover { background: var(--teal-light); transform: translateY(-1px); }
+
+  /* ── RESPONSIVE ─────────────────────────────── */
+  @media (max-width: 900px) {
+    header { padding: 36px 24px 28px; }
+    .header-grid { grid-template-columns: 1fr; }
+    .clients-block { text-align: left; }
+    .clients-grid { grid-template-columns: repeat(4, auto); justify-content: flex-start; }
+    main { grid-template-columns: 1fr; padding: 28px 24px 48px; gap: 28px; }
+    footer { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-grid">
+    <div class="header-left">
+      <h1>Product Marketing Lab</h1>
+      <div class="title">Fractional Product Marketing Consulting</div>
+      <div class="principal-line">
+        <span class="principal-label">Principal</span>
+        <span class="principal-name">Mark Zabezhinsky</span>
+        <span class="principal-sep">|</span>
+        <a href="mailto:markzab@gmail.com">markzab@gmail.com</a>
+        <span class="principal-sep">|</span> 310-597-0899
+        <span class="principal-sep">|</span> New York, NY
+      </div>
+      <div class="tagline">Available for 6–8 week consulting engagements</div>
+    </div>
+    <div class="clients-block">
+      <div class="label">Past Clients &amp; Employers</div>
+      <div class="clients-grid">
+        <div class="client-pill">Alteryx</div>
+        <div class="client-pill">Gartner</div>
+        <div class="client-pill">IBM</div>
+        <div class="client-pill">Intel</div>
+        <div class="client-pill">Verizon</div>
+        <div class="client-pill">Salesforce</div>
+        <div class="client-pill">NYC Gov</div>
+        <div class="client-pill">LeapFrog</div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="accent-bar"></div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- LEFT COLUMN -->
+  <div class="col-left">
+
+    <div class="about">
+      <div class="section-label">About</div>
+      <p>Product Marketing leader with 10+ years driving go-to-market strategy across cloud analytics, AI, enterprise SaaS, and technology consulting. Available for focused 6–8 week engagements to accelerate your pipeline, sharpen positioning, and equip your teams to win.</p>
+    </div>
+
+    <div class="section-label">What I Offer</div>
+    <ul class="offer-list">
+      <li><span><strong>Go-to-Market Strategy</strong> — End-to-end GTM planning from ICP definition through launch.</span></li>
+      <li><span><strong>Messaging &amp; Positioning</strong> — Differentiated messaging that equips sales teams to close.</span></li>
+      <li><span><strong>Competitive Analysis</strong> — Rapid intel, win/loss analysis, and market sizing.</span></li>
+      <li><span><strong>Sales Enablement</strong> — Pitch decks, battlecards, objection guides, and training.</span></li>
+      <li><span><strong>Pricing &amp; Packaging</strong> — Tiered structures, bundles, and partner pricing by segment.</span></li>
+      <li><span><strong>AI &amp; Cloud Launches</strong> — Specialized expertise launching analytics and AI products.</span></li>
+    </ul>
+
+    <div class="section-label">Areas of Expertise</div>
+    <div class="tags">
+      <span class="tag">Cloud Analytics</span>
+      <span class="tag">AI/ML Products</span>
+      <span class="tag">SaaS GTM</span>
+      <span class="tag">Enterprise B2B</span>
+      <span class="tag">Sales Enablement</span>
+      <span class="tag">Competitive Intel</span>
+      <span class="tag">Pricing &amp; Pkg</span>
+      <span class="tag">Product Launches</span>
+    </div>
+
+  </div>
+
+  <!-- CENTER COLUMN -->
+  <div class="col-center">
+
+    <div class="section-label">Sample 6–8 Week Engagement</div>
+    <div class="timeline">
+      <div class="phase">
+        <div class="phase-header"><span class="weeks">Weeks 1–2</span> | DISCOVER &amp; DIAGNOSE</div>
+        <div class="phase-body">Audit existing positioning, messaging, and competitive landscape. Interview stakeholders and customers. Define success metrics.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-header"><span class="weeks">Weeks 3–4</span> | DEVELOP &amp; ALIGN</div>
+        <div class="phase-body">Deliver core messaging framework, buyer personas, and ICP. Facilitate alignment workshops with sales, product, and marketing leadership.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-header"><span class="weeks">Weeks 5–6</span> | BUILD &amp; ENABLE</div>
+        <div class="phase-body">Produce priority sales assets: pitch deck, one-pagers, battlecards, and objection-handling guide. Train sales and SDR teams.</div>
+      </div>
+      <div class="phase">
+        <div class="phase-header"><span class="weeks">Weeks 7–8</span> | LAUNCH &amp; HAND OFF</div>
+        <div class="phase-body">Execute launch plan, measure early KPIs, present recommendations to C-suite, and hand off a repeatable GTM playbook.</div>
+      </div>
+    </div>
+
+    <div class="section-label">Engagement Model</div>
+    <table class="model-table">
+      <tr><td>Duration:</td><td>6–8 weeks</td></tr>
+      <tr><td>Format:</td><td>Embedded or remote</td></tr>
+      <tr><td>Deliverables:</td><td>Defined at kickoff</td></tr>
+      <tr><td>Works with:</td><td>PMM, sales &amp; product teams</td></tr>
+    </table>
+
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="col-right">
+
+    <div class="section-label">Value You Get</div>
+    <div class="value-cards">
+      <div class="value-card">
+        <h4>Revenue-Ready Messaging</h4>
+        <p>Walk away with a complete messaging framework your sales team can use immediately — no internal back-and-forth required.</p>
+      </div>
+      <div class="value-card">
+        <h4>Faster Time to Market</h4>
+        <p>An experienced operator who has launched $100M+ products takes the ambiguity out of GTM execution so you move faster.</p>
+      </div>
+      <div class="value-card">
+        <h4>C-Suite Alignment</h4>
+        <p>Structured workshops and exec-ready deliverables that build cross-functional consensus around strategy and priorities.</p>
+      </div>
+      <div class="value-card">
+        <h4>A Playbook You Keep</h4>
+        <p>Every engagement ends with a documented GTM playbook — your team owns it and can repeat it for future launches.</p>
+      </div>
+      <div class="value-card">
+        <h4>Sales Momentum</h4>
+        <p>Trained reps, sharp battlecards, and clear objection-handling so your pipeline moves from stuck to closing.</p>
+      </div>
+    </div>
+
+    <div class="section-label">Why Mark</div>
+    <ul class="why-list">
+      <li>Launched Alteryx's cloud product to &gt;$100M revenue with 15%+ YOY growth</li>
+      <li>Led 6–8 week engagements at Gartner for IBM, Intel, Salesforce &amp; Verizon</li>
+      <li>Delivered keynotes to audiences of 5,000+ customers and partners</li>
+      <li>Regularly presented to C-suite and board-level stakeholders</li>
+      <li>Fluent across B2B product marketing and consulting methodologies</li>
+    </ul>
+
+  </div>
+
+  <!-- CTA -->
+  <div class="cta-section">
+    <a href="mailto:markzab@gmail.com" class="cta-btn">Get in Touch — Available for Immediate Engagement</a>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <a href="https://productmarketinglab.com">productmarketinglab.com</a>
+  <span>markzab@gmail.com &nbsp;|&nbsp; 310-597-0899 &nbsp;|&nbsp; Available for immediate engagement</span>
+</footer>
+
+</body>
+</html>
